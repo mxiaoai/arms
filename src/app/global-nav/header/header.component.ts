@@ -1,3 +1,4 @@
+import { AuthService } from '../../user/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  navbarOpen: boolean = false;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
 }

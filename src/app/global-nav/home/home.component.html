@@ -1,3 +1,11 @@
-<p>
-  home works!
-</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="support-frame">
+      <h1>Welcome
+        <span *ngIf="authService.isLoggedIn()" class="text-primary">{{
+            authService.getCurrentUser().username
+          }}</span>
+      </h1>
+    </div>
+  </div>
+</div>
