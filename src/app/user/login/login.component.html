@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row justify-content-center support-frame">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <div
+        *ngIf="submitted && invalidLogin"
+        class="alert alert-danger text-center"
+      >
+        <p *ngIf="invalidLogin">Invalid username and/or password.</p>
+      </div>
+      <h1 class="text-primary text-center">{{ title }}</h1>
+      <form class="mt-5" [formGroup]="signinForm" (ngSubmit)="signIn()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            id="email"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            (keyup)="onClear()"
+            [ngClass]="{ 'is-invalid': submitted && email.errors}"
+            autofocus
+          />
+          <div
+            *ngIf="
+              submitted &&
+              email.errors
+            "
+          >
+            <small *ngIf="
+                submitted && 
+                email.errors.required">
+              Email Required
+            </small>
+            <small *ngIf="
+                submitted &&
+                email.errors.pattern">
+              Email pattern: abc@domain.com
+            </small>
+          </div>
+          <small id="emailHelp" class="form-text text-muted"
+            >We'll never share your email with anyone else.</small
+          >
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <a class="form-sublink" 
+             routerLink="/forgetpwd"
+             routerLinkActive="active">
+             Forgot password?</a>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            id="password"
+            (keyup)="onClear()"
+            placeholder="Password"
+            [ngClass]="{ 'is-invalid': submitted && password.errors}"
+          />
+          <div
+            *ngIf="
+              submitted &&
+              password.errors
+            "
+          >
+            <small *ngIf="
+                submitted &&
+                password.errors.required">
+              Password Required
+            </small>
+            <small *ngIf="
+                submitted &&
+                password.errors.minlength">
+              Password should be at least 6 letters long
+            </small>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mb-4">
+          Sign In
+        </button>
+        <p class="small text-center text-gray-soft">
+          Don't have an account yet?
+          <a routerLink="/register" routerLinkActive="active">Register</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
