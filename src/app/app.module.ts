@@ -1,3 +1,4 @@
+import { fakeBackendProvider } from './helper/fake-backend';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './user/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GlobalNavModule } from './global-nav/global-nav.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,13 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     BrowserModule,
     AppRoutingModule,
     GlobalNavModule,
+    UserModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })
