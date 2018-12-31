@@ -47,11 +47,44 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return of(new HttpResponse({ status: 200, body: responseBody }));
             }
  
+            if (request.url.endsWith('/checkemail') && request.method === 'POST') {
+                let body = JSON.parse(request.body);
+                let responseBody = {};
+                if (body.email === 'mxiaoai@domain.com') {
+                    responseBody = {
+                        flow: 'resetpw',
+                        status: 'success',
+                        errorMessage: null,
+                        email: 'mxiaoai@domain.com',
+                        password: null
+                    }
+                } else {
+                    responseBody = {
+                        flow: 'resetpw',
+                        status: 'failure',
+                        errorMessage: 'Email does not exist',
+                        email: null,
+                        password: null
+                    }
+                }
+                return of(new HttpResponse({ status: 200, body: responseBody }));
+            }
             
+            if (request.url.endsWith('/resetpw') && request.method === 'POST') {
+                let responseBody = {
+                    flow: 'resetpw',
+                    status: 'success',
+                    errorMessage: null
+                };
+                
+                return of(new HttpResponse({ status: 200, body: responseBody }));
+            }
+
             // pass through any requests not handled above
             return next.handle(request);
              
         }))
+
  
         // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
         .pipe(materialize())

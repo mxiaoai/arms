@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row justify-content-center support-frame">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <div *ngIf="invalidReset" class="alert alert-danger text-center">
+        Invalid Reset.
+      </div>
+      <!-- <div *ngIf="resetSucc" class="alert alert-success text-center">
+        Reset Success. Please go to 
+        <a routerLink="/login" routerLinkActive="active">login</a>.
+      </div> -->
+      <h2 class="text-primary text-center">Reset your password</h2>
+      <form class="mt-5" [formGroup]="resetForm" (ngSubmit)="reset()">
+
+      <div class="form-group">
+        <p> {{ emailStr }} </p>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Password"
+          [ngClass]="{
+            'is-invalid': submitted && password.errors
+          }">
+        <div *ngIf="submitted && password.errors">
+          <small *ngIf="submitted && password.errors.required">
+            Password Required
+          </small>
+          <small *ngIf="submitted && password.errors.minlength">
+            Password no less than 6 letters long
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmpassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmpassword"
+          class="form-control"
+          formControlName="confirmpassword"
+          placeholder="Password"
+          [ngClass]="{
+            'is-invalid': submitted && confirmpassword.errors
+          }">
+        <div *ngIf="submitted && confirmpassword.errors">
+          <small *ngIf="submitted && confirmpassword.errors.required">
+            Password Required
+          </small>
+          <small *ngIf="submitted && confirmpassword.errors.passwordnotmatch">
+            Confirm Password not same as password
+          </small>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block" [disabled]="resetSucc">
+        Reset Password
+      </button>
+    </form>
+
+  </div>
+</div>
