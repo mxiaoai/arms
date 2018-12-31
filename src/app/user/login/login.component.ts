@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   changeTitle() {
     switch(this.redirectFrom) {
-      case 'resetPwd':
+      case 'resetpwd':
         this.title = 'Login with Your New Password';
         break;
       case 'register':

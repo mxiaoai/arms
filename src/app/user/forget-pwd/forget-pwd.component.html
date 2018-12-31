@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row justify-content-center support-frame">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-6">
+      <div *ngIf="submitted && !emailExist" class="alert alert-danger text-center">
+          Invalid account.
+      </div>
+      <h1 class="text-primary text-center">Forgot Your Password?</h1>
+      <p class="fs-14 text-gray text-center">Enter your email then reset your password</p>
+      <form #f="ngForm" class="mt-5" (ngSubmit)="submit(f)">
+        <div class="form-group">
+          <label>Email</label>
+          <input  type="text" 
+                  required
+                  ngModel
+                  name="email"
+                  pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                  #email="ngModel"
+                  placeholder="Email Address"
+                  id="email"
+                  class="form-control"
+                  [ngClass]="{'is-invalid': submitted && email.errors}"
+                  (keyup)="onClear()"/>
+          <div *ngIf="
+            submitted &&
+            email.errors">
+            <small *ngIf="
+              submitted && 
+              email.errors.required">
+              Email Required
+            </small>
+            <small *ngIf="
+                submitted &&
+                email.errors.pattern">
+              Email pattern: abc@domain.com
+            </small>
+          </div>
+        </div>
+        <br/><br/>
+        <button class="btn btn-primary btn-block mb-4">Submit</button>
+        <p class="small text-center text-gray-soft">
+            Remember your password?
+            <a routerLink="/login" routerLinkActive="active">Login</a>
+          </p>
+      </form>
+    </div>
+  </div>
+</div>

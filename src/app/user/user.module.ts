@@ -6,9 +6,11 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { fakeBackendProvider } from '../helper/fake-backend';
 import { RouterModule } from '@angular/router';
+import { ForgetPwdComponent } from './forget-pwd/forget-pwd.component';
+import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, ForgetPwdComponent, ResetPwdComponent],
   imports: [
     RouterModule,
     CommonModule,
