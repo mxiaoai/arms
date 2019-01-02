@@ -1,17 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import {
+  AbstractControl,
+  FormGroup,
+  FormBuilder,
+  Validators
+} from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { map, catchError } from "rxjs/operators";
+import { of } from "rxjs";
 
 @Component({
-  selector: 'app-reset-pwd',
-  templateUrl: './reset-pwd.component.html',
-  styleUrls: ['./reset-pwd.component.scss']
+  selector: "app-reset-pwd",
+  templateUrl: "./reset-pwd.component.html",
+  styleUrls: ["./reset-pwd.component.scss"]
 })
 export class ResetPwdComponent implements OnInit {
-
   private emailStr: string;
   private email: AbstractControl;
   private resetForm: FormGroup;
@@ -20,14 +24,16 @@ export class ResetPwdComponent implements OnInit {
   private submitted: boolean = false;
   private invalidReset: boolean = false;
   // private resetSucc: boolean = false;
-  private url: string = '/resetpw';
+  private url: string = "/resetpw";
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute
+  ) {
     this.resetForm = this.formBuilder.group(
-      { 
+      {
         email: ["123"],
         password: ["", [Validators.required, Validators.minLength(6)]],
         confirmpassword: ["", Validators.required]
@@ -42,14 +48,12 @@ export class ResetPwdComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.emailStr = this.route.snapshot.queryParams['email'];
+    this.emailStr = this.route.snapshot.queryParams["email"];
     this.email.setValue(this.emailStr);
-    this.route.queryParams.subscribe(
-      data => {
-        this.emailStr = data['email'];
-        this.email.setValue(this.emailStr);
-      }
-    )
+    this.route.queryParams.subscribe(data => {
+      this.emailStr = data["email"];
+      this.email.setValue(this.emailStr);
+    });
   }
 
   matchPassword(control: AbstractControl) {
@@ -65,8 +69,9 @@ export class ResetPwdComponent implements OnInit {
 
   reset() {
     this.submitted = true;
-    if (this.resetForm.invalid)
+    if (this.resetForm.invalid) {
       return;
+    }
     if (this.emailStr == null || this.emailStr == "") {
       this.invalidReset = true;
       return;
@@ -75,34 +80,35 @@ export class ResetPwdComponent implements OnInit {
     let body = this.resetForm.value;
     delete body.confirmpassword;
     console.log(body);
-    this.resetPwd(JSON.stringify(body))
-    .subscribe(res => {
+    this.resetPwd(JSON.stringify(body)).subscribe(res => {
       if (res) {
         this.invalidReset = false;
         // this.resetSucc = true;
-        this.router.navigate(['/login'], {queryParams: {redirectFrom: 'resetpwd'}});
+        this.router.navigate(["/login"], {
+          queryParams: { redirectFrom: "resetpwd" }
+        });
       }
     });
   }
-  
+
   resetPwd(body: string) {
-    return this.http.post(this.url, body)
-    .pipe(
-      map(response => {
-      if (response && response['status'] === 'success') {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    catchError((error) => {
-      // it's important that we log an error here.
-      // Otherwise you won't see an error in the console.
-      console.error('error resetting password', error);
-      // loadingError$.next(true);
-      return of();
-    })))
+    return this.http.post(this.url, body).pipe(
+      map(
+        response => {
+          if (response && response["status"] === "success") {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        catchError(error => {
+          // it's important that we log an error here.
+          // Otherwise you won't see an error in the console.
+          console.error("error resetting password", error);
+          // loadingError$.next(true);
+          return of();
+        })
+      )
+    );
   }
-
-
 }
