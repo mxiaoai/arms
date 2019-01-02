@@ -1,31 +1,27 @@
-import { fakeBackendProvider } from './helper/fake-backend';
-import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './user/auth.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { fakeBackendProvider } from "./helper/fake-backend";
+import { HttpClientModule } from "@angular/common/http";
+import { AuthService } from "./user/auth.service";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { GlobalNavModule } from './global-nav/global-nav.module';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { GlobalNavModule } from "./global-nav/global-nav.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { UserModule } from './user/user.module';
+import { UserModule } from "./user/user.module";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     GlobalNavModule,
     UserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [
-    AuthService,
-    fakeBackendProvider
-  ],
+  providers: [AuthService, fakeBackendProvider],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

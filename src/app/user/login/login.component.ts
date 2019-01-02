@@ -1,12 +1,18 @@
-import { AuthService } from './../auth.service';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from "./../auth.service";
+import { Component, OnInit } from "@angular/core";
+import {
+  FormGroup,
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  Validators
+} from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
   invalidLogin: boolean;
@@ -15,9 +21,8 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   email: AbstractControl;
   password: AbstractControl;
-  title: string = 'Login to Your Account';
+  title: string = "Login to Your Account";
   redirectFrom: string = undefined;
-
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,28 +34,26 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     // change title based on queryParams['redirectFrom']
-    this.redirectFrom = this.route.snapshot.queryParams['redirectFrom'];
+    this.redirectFrom = this.route.snapshot.queryParams["redirectFrom"];
     // console.log(this.redirectFrom);
     this.changeTitle();
-    this.route.queryParams.subscribe(
-      data => {
-        this.redirectFrom = data['redirectFrom'];
-        // console.log(this.redirectFrom);
-        this.changeTitle();
-      }
-    )
+    this.route.queryParams.subscribe(data => {
+      this.redirectFrom = data["redirectFrom"];
+      // console.log(this.redirectFrom);
+      this.changeTitle();
+    });
   }
 
   changeTitle() {
-    switch(this.redirectFrom) {
-      case 'resetpwd':
-        this.title = 'Login with Your New Password';
+    switch (this.redirectFrom) {
+      case "resetpwd":
+        this.title = "Login with Your New Password";
         break;
-      case 'register':
-        this.title = 'Login to Your Registered Account';
+      case "register":
+        this.title = "Login to Your Registered Account";
         break;
       default:
-        this.title = 'Login to Your Account';
+        this.title = "Login to Your Account";
     }
   }
 
@@ -71,7 +74,6 @@ export class LoginComponent implements OnInit {
     this.password = this.signinForm.controls.password;
   }
 
-
   signIn() {
     this.submitted = true;
 
@@ -80,23 +82,18 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.signinForm.value)
-      .subscribe(
-        res => {
-          if (res) {
-            //     let returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
-            //     this.router.navigate([returnUrl || "/home"]);
-            this.router.navigate(["/"]);
-          }
-          else {
-            this.invalidLogin = true;
-          }
-        }
-      );
+    this.authService.login(this.signinForm.value).subscribe(res => {
+      if (res) {
+        //     let returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
+        //     this.router.navigate([returnUrl || "/home"]);
+        this.router.navigate(["/"]);
+      } else {
+        this.invalidLogin = true;
+      }
+    });
   }
 
   onClear() {
     this.invalidLogin = false;
   }
-
 }
