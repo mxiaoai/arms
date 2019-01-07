@@ -1,0 +1,163 @@
+<div class="container">
+  <div class="row justify-content-center support-frame">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+      <div
+        *ngIf="submitted && errorMessage"
+        class="alert alert-danger text-center"
+      >
+        <p *ngIf="errorMessage">{{ errorMessage }}</p>
+      </div>
+      <h1 class="text-primary text-center">{{ contentTitle }}</h1>
+      <br />
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            formControlName="firstName"
+            placeholder="First Name"
+            autofocus
+            [ngClass]="{
+              notvalid: !firstName.valid && submitted
+            }"
+          />
+          <div *ngIf="!firstName.valid && submitted">
+            <span
+              class="help-block hint"
+              *ngIf="firstName.errors.required && submitted"
+              >First name required</span
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            formControlName="lastName"
+            placeholder="Last Name"
+            autofocus
+            [ngClass]="{
+              notvalid: !lastName.valid && submitted
+            }"
+          />
+          <div *ngIf="!lastName.valid && submitted">
+            <span
+              class="help-block hint"
+              *ngIf="lastName.errors.required && submitted"
+              >Last name required</span
+            >
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Password"
+            autofocus
+            [ngClass]="{
+              notvalid: !password.valid && submitted
+            }"
+          />
+          <div *ngIf="!password.valid && submitted">
+            <span
+              class="help-block hint"
+              *ngIf="password.errors.required && submitted"
+            >
+              Password required
+            </span>
+            <span
+              class="help-block hint"
+              *ngIf="password.errors.minlength && submitted"
+            >
+              Password should be at least 6 letters long
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control"
+            formControlName="confirmPassword"
+            placeholder="Confirm Your Password"
+            autofocus
+            [ngClass]="{
+              notvalid: !confirmPassword.valid && submitted
+            }"
+          />
+          <div *ngIf="!confirmPassword.valid && submitted">
+            <span
+              class="help-block hint"
+              *ngIf="confirmPassword.errors.required && submitted"
+            >
+              Confirm password required
+            </span>
+            <span
+              class="help-block hint"
+              *ngIf="confirmPassword.errors.passwordnotmatch && submitted"
+            >
+              Password does not match
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="chnName">Chinese Name</label>
+          <input
+            type="text"
+            id="chnName"
+            class="form-control"
+            formControlName="chnName"
+            placeholder="中文名字"
+            autofocus
+            [ngClass]="{
+              notvalid: !chnName.valid && submitted
+            }"
+          />
+          <div *ngIf="!chnName.valid && submitted">
+            <span
+              class="help-block hint"
+              *ngIf="chnName.errors.required && submitted"
+              >Chinese name required
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="Email Address"
+            autofocus
+            [ngClass]="{
+              notvalid: !email.valid && submitted
+            }"
+          />
+          <div *ngIf="!email.valid && submitted">
+            <span class="help-block hint" *ngIf="!email.valid && submitted"
+              >Please enter a valid email</span
+            >
+          </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary btn-block">
+          Create Account
+        </button>
+        <p class="small text-center text-gray-soft">
+          Already have an account?
+          <a routerLink="/login" routerLinkActive="active">Sign In</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

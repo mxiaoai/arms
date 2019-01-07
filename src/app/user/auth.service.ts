@@ -7,8 +7,9 @@ import { map, catchError } from "rxjs/operators";
 import { of } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthService {
   private currentUser: User = null;
@@ -33,8 +34,7 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    if (!this.currentUser)
-      return null;
+    if (!this.currentUser) return null;
     return this.currentUser;
   }
 
@@ -43,17 +43,25 @@ export class AuthService {
     delete credentials.rememberMe;
     if (this.isRemembered)
       this.loginUrl = environment.remembermeLoginUrl;
-    console.log(this.loginUrl);
+
     return this.http
     .post(this.loginUrl, JSON.stringify(credentials))
     .pipe(
       map(response => {
         // console.log(response);
-        if (response && response["status"] === 'success') {
-          this.currentUser = new User(response["id"], response["email"], 
-              response["firstName"], response["lastName"], response["chnName"], 
-              response["createdBy"], response["createdOn"],
-              response["updatedBy"], response["updatedOn"]);
+        if (response && response["status"] === "success") {
+          this.currentUser = new User(
+            response["id"],
+            response["email"],
+            response["password"],
+            response["firstName"],
+            response["lastName"],
+            response["chnName"],
+            response["createdBy"],
+            response["createdOn"],
+            response["updatedBy"],
+            response["updatedOn"]
+          );
           if (this.isRemembered) {
             let expiredDate = new Date();
             expiredDate.setDate(expiredDate.getDate() + this.expiredTime);

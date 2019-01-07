@@ -1,21 +1,19 @@
 import { ErrorInterceptor } from './helper/error.interceptor';
-import { FakeBackendInterceptor } from './helper/fake-backend';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthService } from './user/auth.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { FakeBackendInterceptor } from "./helper/fake-backend";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthService } from "./user/auth.service";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { GlobalNavModule } from './global-nav/global-nav.module';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { GlobalNavModule } from "./global-nav/global-nav.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { UserModule } from './user/user.module';
-import { CookieService } from 'ngx-cookie-service';
+import { UserModule } from "./user/user.module";
+import { CookieService } from "ngx-cookie-service";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,4 +32,4 @@ import { CookieService } from 'ngx-cookie-service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
