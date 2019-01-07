@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ForgetPwdComponent implements OnInit {
   private email: string = '';
   private emailExist: boolean = true;
   private submitted: boolean = false;
-  private url: string = '/checkemail';
+  private url: string = environment.checkEmailUrl;
 
   constructor(private http: HttpClient,
               private router: Router) { }

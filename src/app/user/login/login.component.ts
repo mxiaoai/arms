@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   password: AbstractControl;
   title: string = 'Login to Your Account';
   redirectFrom: string = undefined;
-
+  rememberMe: AbstractControl;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,12 +65,13 @@ export class LoginComponent implements OnInit {
       password: new FormControl(null, [
         Validators.required,
         Validators.minLength(6)
-      ])
+      ]),
+      rememberMe: new FormControl(false)
     });
     this.email = this.signinForm.controls.email;
     this.password = this.signinForm.controls.password;
+    this.rememberMe = this.signinForm.controls.rememberMe;
   }
-
 
   signIn() {
     this.submitted = true;

@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
-import { fakeBackendProvider } from '../helper/fake-backend';
 import { RouterModule } from '@angular/router';
 import { ForgetPwdComponent } from './forget-pwd/forget-pwd.component';
 import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
@@ -19,8 +18,7 @@ import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
     HttpClientModule
   ],
   providers: [
-    AuthService,
-    fakeBackendProvider
+    AuthService
   ],
   exports: [
     LoginComponent
