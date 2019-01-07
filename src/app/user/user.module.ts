@@ -24,7 +24,12 @@ import { RegisterComponent } from "./register/register.component";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, fakeBackendProvider],
-  exports: [LoginComponent]
+  providers: [
+    AuthService
+  ],
+  exports: [
+    LoginComponent
+  ]
+
 })
 export class UserModule {}

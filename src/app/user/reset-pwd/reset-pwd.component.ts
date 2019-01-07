@@ -9,6 +9,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { map, catchError } from "rxjs/operators";
 import { of } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-reset-pwd",
@@ -24,7 +25,7 @@ export class ResetPwdComponent implements OnInit {
   private submitted: boolean = false;
   private invalidReset: boolean = false;
   // private resetSucc: boolean = false;
-  private url: string = "/resetpw";
+  private url: string = environment.resetPwdUrl;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,7 +80,7 @@ export class ResetPwdComponent implements OnInit {
 
     let body = this.resetForm.value;
     delete body.confirmpassword;
-    console.log(body);
+    // console.log(body);
     this.resetPwd(JSON.stringify(body)).subscribe(res => {
       if (res) {
         this.invalidReset = false;

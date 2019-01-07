@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  cookieId: 'SESSIONIDAptx4869',
+  cookieExpiredTime: 7,
+  loginUrl: '/login',
+  remembermeLoginUrl: '/rememberme/login',
+  checkEmailUrl: '/checkemail',
+  resetPwdUrl: '/resetpw'
 };
 
 /*

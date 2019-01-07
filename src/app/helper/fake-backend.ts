@@ -12,6 +12,8 @@ import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
+  private cookieId: string = "SESSIONIDAptx4869";
+
   constructor() {}
 
   intercept(
@@ -26,6 +28,40 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       of(null)
         .pipe(
           mergeMap(() => {
+            let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZmlyc3ROYW1lIjoiU2hpcmxleSIsImxhc3ROYW1lIjoiTWEiLCJjaG5OYW1lIjoi5Li-5Liq5L6L5a2QIiwiZW1haWwiOiJteGlhb2FpQGRvbWFpbi5jb20iLCJjcmVhdGVkQnkiOiJBZG1pbiIsImNyZWF0ZWRPbiI6IjIwMTgtMTItMjAiLCJ1cGRhdGVkQnkiOiJBZG1pbiIsInVwZGF0ZWRPbiI6IjIwMTgtMTItMjEifQ.XLtWBWsxLlMwQAlAWuNVcrj8QiOPy2F58q4cpy_Pzec";
+
+            if (request.url.endsWith('/rememberme/login') && request.method === 'POST') {
+                // find if any user matches login credentials
+                let body = JSON.parse(request.body);
+                let responseBody = {};
+                if (body.email === 'mxiaoai@domain.com' &&
+                    body.password === '123456') {
+                    // if login details are valid return 200 OK with user details and fake jwt token
+                    responseBody = {
+                        flow: "remembermelogin",
+                        id: 6,
+                        status: "success",
+                        firstName: "Shirley",
+                        lastName: "Ma",
+                        chnName: "举个例子",
+                        email: "mxiaoai@domain.com",
+                        createdBy: "Admin",
+                        createdOn: "2018-12-20",
+                        updatedBy: "Admin",
+                        updatedOn: "2018-12-21",
+                        token: token
+                    };
+                } else {
+                    responseBody = {
+                        status: "failure",
+                        errorMessage: "Invalid username and/or password"
+                        
+                    };
+                }
+                // this.cookieService.set(this.cookieId, token);
+                return of(new HttpResponse({ status: 200, body: responseBody }));
+            }
+
             // authenticate
             if (request.url.endsWith("/login") && request.method === "POST") {
               // find if any user matches login credentials
