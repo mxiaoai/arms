@@ -9,6 +9,7 @@ import { User } from "../user.model";
 import { CustomValidators } from "../../helper/customValidators";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-register",
@@ -18,7 +19,8 @@ import { Router } from "@angular/router";
 export class RegisterComponent implements OnInit {
   contentTitle: string = "Create an Account";
   errorMessage: string = "";
-  registerUrl: string = "/register";
+  registerUrl: string = environment.registerUrl;
+  loginUrl: string = environment.loginUrl;
   registerForm: FormGroup;
   submitted: boolean = false;
   user: User;
@@ -88,17 +90,18 @@ export class RegisterComponent implements OnInit {
 
   onRegister() {
     this.submitted = true;
-    if (this.registerForm.valid) {
-      this.user.firstName = this.firstName.value;
-      this.user.lastName = this.lastName.value;
-      this.user.password = this.password.value;
-      this.user.chnName = this.chnName.value;
-      this.user.email = this.email.value;
+    if (this.registerForm.invalid) {
+      return;
     }
-    this.registerToFakeBackend(this.user);
+    this.user.firstName = this.firstName.value;
+    this.user.lastName = this.lastName.value;
+    this.user.password = this.password.value;
+    this.user.chnName = this.chnName.value;
+    this.user.email = this.email.value;
+    this.creatNewAccount(this.user);
   }
 
-  registerToFakeBackend(newUser: User) {
+  creatNewAccount(newUser: User) {
     const body = {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
@@ -113,7 +116,7 @@ export class RegisterComponent implements OnInit {
       if (response && response["status"] === "failure") {
         this.errorMessage = response["errorMessage"];
       } else if (response && response["status"] === "success") {
-        this.router.navigate(["/login"], {
+        this.router.navigate([this.loginUrl], {
           queryParams: { redirectFrom: "register" }
         });
       }

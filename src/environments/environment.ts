@@ -4,12 +4,13 @@
 
 export const environment = {
   production: false,
-  cookieId: 'SESSIONIDAptx4869',
+  cookieId: "SESSIONIDAptx4869",
   cookieExpiredTime: 7,
-  loginUrl: '/login',
-  remembermeLoginUrl: '/rememberme/login',
-  checkEmailUrl: '/checkemail',
-  resetPwdUrl: '/resetpw'
+  loginUrl: "/login",
+  remembermeLoginUrl: "/rememberme/login",
+  checkEmailUrl: "/checkemail",
+  resetPwdUrl: "/resetpw",
+  registerUrl: "/register"
 };
 
 /*

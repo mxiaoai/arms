@@ -20,14 +20,12 @@
             placeholder="First Name"
             autofocus
             [ngClass]="{
-              notvalid: !firstName.valid && submitted
+              'is-invalid': !firstName.valid && submitted
             }"
           />
           <div *ngIf="!firstName.valid && submitted">
-            <span
-              class="help-block hint"
-              *ngIf="firstName.errors.required && submitted"
-              >First name required</span
+            <small *ngIf="firstName.errors.required && submitted"
+              >First name required</small
             >
           </div>
         </div>
@@ -42,14 +40,12 @@
             placeholder="Last Name"
             autofocus
             [ngClass]="{
-              notvalid: !lastName.valid && submitted
+              'is-invalid': !lastName.valid && submitted
             }"
           />
           <div *ngIf="!lastName.valid && submitted">
-            <span
-              class="help-block hint"
-              *ngIf="lastName.errors.required && submitted"
-              >Last name required</span
+            <small *ngIf="lastName.errors.required && submitted"
+              >Last name required</small
             >
           </div>
         </div>
@@ -63,22 +59,16 @@
             placeholder="Password"
             autofocus
             [ngClass]="{
-              notvalid: !password.valid && submitted
+              'is-invalid': !password.valid && submitted
             }"
           />
           <div *ngIf="!password.valid && submitted">
-            <span
-              class="help-block hint"
-              *ngIf="password.errors.required && submitted"
-            >
+            <small *ngIf="password.errors.required && submitted">
               Password required
-            </span>
-            <span
-              class="help-block hint"
-              *ngIf="password.errors.minlength && submitted"
-            >
+            </small>
+            <small *ngIf="password.errors.minlength && submitted">
               Password should be at least 6 letters long
-            </span>
+            </small>
           </div>
         </div>
         <div class="form-group">
@@ -91,22 +81,16 @@
             placeholder="Confirm Your Password"
             autofocus
             [ngClass]="{
-              notvalid: !confirmPassword.valid && submitted
+              'is-invalid': !confirmPassword.valid && submitted
             }"
           />
           <div *ngIf="!confirmPassword.valid && submitted">
-            <span
-              class="help-block hint"
-              *ngIf="confirmPassword.errors.required && submitted"
-            >
+            <small *ngIf="confirmPassword.errors.required && submitted">
               Confirm password required
-            </span>
-            <span
-              class="help-block hint"
-              *ngIf="confirmPassword.errors.passwordnotmatch && submitted"
-            >
+            </small>
+            <small *ngIf="confirmPassword.errors.passwordnotmatch && submitted">
               Password does not match
-            </span>
+            </small>
           </div>
         </div>
         <div class="form-group">
@@ -119,15 +103,13 @@
             placeholder="中文名字"
             autofocus
             [ngClass]="{
-              notvalid: !chnName.valid && submitted
+              'is-invalid': !chnName.valid && submitted
             }"
           />
           <div *ngIf="!chnName.valid && submitted">
-            <span
-              class="help-block hint"
-              *ngIf="chnName.errors.required && submitted"
+            <small *ngIf="chnName.errors.required && submitted"
               >Chinese name required
-            </span>
+            </small>
           </div>
         </div>
         <div class="form-group">
@@ -140,12 +122,12 @@
             placeholder="Email Address"
             autofocus
             [ngClass]="{
-              notvalid: !email.valid && submitted
+              'is-invalid': !email.valid && submitted
             }"
           />
           <div *ngIf="!email.valid && submitted">
-            <span class="help-block hint" *ngIf="!email.valid && submitted"
-              >Please enter a valid email</span
+            <small *ngIf="!email.valid && submitted"
+              >Please enter a valid email</small
             >
           </div>
         </div>
