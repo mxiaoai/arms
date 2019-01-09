@@ -33,7 +33,6 @@ export class ForgetPwdComponent implements OnInit {
     this.authenticateEmail(form.value)
     .subscribe(res => {
       if (res) {
-        console.log(this.email);
         this.router.navigate(["/resetpwd"], {queryParams: {email: this.email}});
       } else {
         this.emailExist = false;
@@ -42,7 +41,7 @@ export class ForgetPwdComponent implements OnInit {
   }
 
   authenticateEmail(form) {
-    return this.http.post(this.url, JSON.stringify(form))
+    return this.http.get(this.url + `/${form['email']}`)
             .pipe(
               map(response => {
                 if (response && response['status'] === 'success') {

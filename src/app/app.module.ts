@@ -27,8 +27,8 @@ import { CookieService } from "ngx-cookie-service";
     CookieService,
 
     // { provide: HTTP_INTERCEPTORS, useClass: CookieInterceptor, multi: true},
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    // { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

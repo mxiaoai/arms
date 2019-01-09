@@ -3,7 +3,7 @@
     <div class="support-frame">
       <h1>Welcome
         <span *ngIf="authService.isLoggedIn()" class="text-primary">{{
-            authService.getCurrentUser().firstName
+            authService.getCurrentUser().email
           }}</span>
       </h1>
     </div>

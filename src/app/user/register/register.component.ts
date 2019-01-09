@@ -116,7 +116,7 @@ export class RegisterComponent implements OnInit {
       if (response && response["status"] === "failure") {
         this.errorMessage = response["errorMessage"];
       } else if (response && response["status"] === "success") {
-        this.router.navigate([this.loginUrl], {
+        this.router.navigate(["/login"], {
           queryParams: { redirectFrom: "register" }
         });
       }

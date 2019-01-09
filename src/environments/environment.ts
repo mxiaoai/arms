@@ -6,11 +6,11 @@ export const environment = {
   production: false,
   cookieId: "SESSIONIDAptx4869",
   cookieExpiredTime: 7,
-  loginUrl: "/login",
-  remembermeLoginUrl: "/rememberme/login",
-  checkEmailUrl: "/checkemail",
-  resetPwdUrl: "/resetpw",
-  registerUrl: "/register"
+  loginUrl: "http://localhost:8080/user/login",
+  remembermeLoginUrl: "http://localhost:8080/user/rememberme",
+  checkEmailUrl: "http://localhost:8080/user/forgetpw",
+  resetPwdUrl: "http://localhost:8080/user/resetpw",
+  registerUrl: "http://localhost:8080/user/register"
 };
 
 /*

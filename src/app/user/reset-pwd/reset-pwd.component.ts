@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import {
   AbstractControl,
   FormGroup,
@@ -26,6 +26,11 @@ export class ResetPwdComponent implements OnInit {
   private invalidReset: boolean = false;
   // private resetSucc: boolean = false;
   private url: string = environment.resetPwdUrl;
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -93,7 +98,7 @@ export class ResetPwdComponent implements OnInit {
   }
 
   resetPwd(body: string) {
-    return this.http.post(this.url, body).pipe(
+    return this.http.post(this.url, body, this.httpOptions).pipe(
       map(
         response => {
           if (response && response["status"] === "success") {
