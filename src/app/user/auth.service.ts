@@ -70,21 +70,8 @@ export class AuthService {
           if (this.isRemembered) {
             let expiredDate = new Date();
             expiredDate.setDate(expiredDate.getDate() + this.expiredTime);
-            let token = response["jwt"];
+            let token = response["token"];
             this.cookieService.set(this.cookieId, token, expiredDate);
-            let user = this.jwtHelper.decodeToken(token);
-            this.currentUser = new User(
-              null,
-              user["sub"],
-              user["password"],
-              null,
-              null,
-              null,
-              null,
-              null,
-              null,
-              null
-            );
             localStorage.setItem(this.localstorageKey, JSON.stringify(this.currentUser));
           }
           return true;
